@@ -13,21 +13,18 @@
             padding: 0;
         }
 
+        /* Bloqueo de movimiento vertical y scroll */
         html, body {
             width: 100%;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100%;
+            overflow: hidden; /* Evita el scroll totalmente */
+            position: fixed; /* Fija la pantalla para evitar rebotes en móviles */
             background: #ffb6c1;
             background: linear-gradient(180deg, #ffb6c1 0%, #ffc0cb 100%);
-            background-attachment: fixed;
             font-family: 'Poppins', sans-serif;
-        }
-
-        body {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 4rem 1rem 2rem 1rem;
         }
 
         .card {
@@ -39,15 +36,17 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.1);
             text-align: center;
             max-width: 380px;
-            width: 95%;
+            width: 90%;
             z-index: 10;
             position: relative;
             animation: fadeIn 1s ease-out;
             border: 1px solid rgba(255, 255, 255, 0.5);
+            /* Asegura que no se mueva */
+            touch-action: none; 
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -67,7 +66,6 @@
             padding: 10px;
         }
 
-        /* Efecto de latido para el corazón */
         .heart-svg {
             width: 70px;
             height: 70px;
@@ -86,16 +84,16 @@
         h1 {
             font-family: 'Dancing Script', cursive;
             color: #c2185b;
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
             font-weight: 700;
         }
 
         .text-body {
-            font-size: 0.95rem;
-            line-height: 1.6;
+            font-size: 0.9rem;
+            line-height: 1.5;
             color: #222;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
 
         .highlight {
@@ -107,8 +105,8 @@
             background-color: rgba(173, 20, 75, 0.9);
             color: white;
             border: none;
-            padding: 15px;
-            font-size: 0.95rem;
+            padding: 14px;
+            font-size: 0.9rem;
             border-radius: 50px;
             cursor: pointer;
             width: 100%;
@@ -119,7 +117,7 @@
             font-weight: 600;
             box-shadow: 0 10px 25px rgba(173, 20, 75, 0.3);
             transition: transform 0.1s ease;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .btn:active {
@@ -128,19 +126,19 @@
 
         .play-icon {
             background: #ff9800;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: white;
         }
 
         .love-note {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #d81b60;
             margin-top: 0.2rem;
             animation: softPulse 3s infinite ease-in-out;
@@ -162,21 +160,22 @@
 
         @keyframes fall {
             0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.7; }
-            85% { opacity: 0.7; }
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
             100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
-        @media (max-height: 700px) {
-            .card { padding-top: 2rem; }
-            h1 { font-size: 1.8rem; }
-            .text-body { font-size: 0.85rem; }
-            .header-illustration { width: 90px; height: 90px; margin-top: -75px; }
-            .heart-svg { width: 55px; height: 55px; }
+        /* Ajustes para pantallas muy pequeñas */
+        @media (max-height: 600px) {
+            .card { padding: 2rem 1.2rem 1.5rem 1.2rem; margin-top: 40px; }
+            h1 { font-size: 1.6rem; }
+            .text-body { font-size: 0.8rem; }
+            .header-illustration { width: 80px; height: 80px; margin-top: -65px; }
+            .heart-svg { width: 50px; height: 50px; }
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <audio id="player" loop>
         <source src="la_ruta_a_tu_mirada.mp3" type="audio/mpeg">
@@ -184,12 +183,10 @@
 
     <div class="card">
         <div class="header-illustration">
-            <!-- SVG de Corazón Rojo Animado -->
             <svg class="heart-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M 50 90 C 10 55, 10 20, 32 20 C 42 20, 50 30, 50 30 C 50 30, 58 20, 68 20 C 90 20, 90 55, 50 90 Z" fill="#e91e63">
                     <animate attributeName="fill" values="#e91e63;#ff5252;#e91e63" dur="2s" repeatCount="indefinite" />
                 </path>
-                <!-- Brillo del corazón -->
                 <ellipse cx="35" cy="35" rx="8" ry="4" fill="white" fill-opacity="0.3" transform="rotate(-30, 35, 35)" />
             </svg>
         </div>
@@ -219,22 +216,23 @@
         const symbols = ['❤️', '💖', '💕', '✨', '🌸'];
 
         function spawn() {
-            if (document.querySelectorAll('.floating').length > 20) return;
+            if (document.querySelectorAll('.floating').length > 15) return;
             const el = document.createElement('div');
             el.className = 'floating';
             el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
-            const duration = Math.random() * 3 + 4; 
+            el.style.fontSize = (Math.random() * 1 + 0.8) + 'rem';
+            const duration = Math.random() * 3 + 5; 
             el.style.animationDuration = `${duration}s`;
             document.body.appendChild(el);
             setTimeout(() => { el.remove(); }, duration * 1000);
         }
 
-        setInterval(spawn, 500);
+        setInterval(spawn, 600);
 
         let isPlaying = false;
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
             if (!isPlaying) {
                 audio.play().then(() => { updateUI(true); }).catch(() => { updateUI(true); });
             } else {
@@ -255,6 +253,11 @@
                 btn.style.backgroundColor = '#ad144b';
             }
         }
+
+        // Evitar que el usuario pueda arrastrar o hacer scroll accidentalmente
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
