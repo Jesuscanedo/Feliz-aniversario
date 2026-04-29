@@ -29,10 +29,10 @@
             align-items: center;
         }
 
-        /* Tarjeta con mayor transparencia (Glassmorphism avanzado) */
+        /* Tarjeta con transparencia y efecto cristal */
         .card {
-            background: rgba(255, 252, 253, 0.5); /* Opacidad reducida de 0.75 a 0.5 */
-            backdrop-filter: blur(12px); /* Aumento del desenfoque para estilo cristalino */
+            background: rgba(255, 252, 253, 0.5);
+            backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 2.8rem 1.8rem;
             border-radius: 40px;
@@ -51,23 +51,30 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Corazón flotante sobre la tarjeta */
-        .header-heart {
-            width: 85px;
-            height: 85px;
-            background: rgba(255, 255, 255, 0.8);
+        /* Contenedor del SVG Principal */
+        .header-illustration {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(5px);
             -webkit-backdrop-filter: blur(5px);
             border-radius: 50%;
-            margin: -80px auto 20px auto;
+            margin: -90px auto 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-            font-size: 2.8rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
             position: relative;
             z-index: 11;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            animation: pulse 2.5s infinite ease-in-out;
+            padding: 10px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+            50% { transform: scale(1.08); box-shadow: 0 12px 35px rgba(216, 27, 96, 0.2); }
+            100% { transform: scale(1); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
         }
 
         h1 {
@@ -82,8 +89,8 @@
         .text-body {
             font-size: 0.92rem;
             line-height: 1.7;
-            color: #222; /* Texto un poco más oscuro para contrastar con la transparencia */
-            margin-bottom: 2.5rem;
+            color: #222;
+            margin-bottom: 2rem;
         }
 
         .highlight {
@@ -91,7 +98,7 @@
             font-weight: 600;
         }
 
-        /* Botón estilo píldora premium */
+        /* Botón de reproducción */
         .btn {
             background-color: rgba(173, 20, 75, 0.9);
             color: white;
@@ -108,6 +115,7 @@
             font-weight: 600;
             box-shadow: 0 10px 25px rgba(173, 20, 75, 0.3);
             transition: transform 0.1s ease, background-color 0.3s ease;
+            margin-bottom: 1.5rem;
         }
 
         .btn:active {
@@ -124,6 +132,20 @@
             justify-content: center;
             font-size: 0.8rem;
             color: white;
+        }
+
+        /* Leyenda Final (Después del botón) */
+        .love-note {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #d81b60;
+            margin-top: 0.5rem;
+            animation: softPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes softPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
         }
 
         /* Elementos flotantes por DETRÁS de la tarjeta */
@@ -161,7 +183,22 @@
     </audio>
 
     <div class="card">
-        <div class="header-heart">❤️</div>
+        <div class="header-illustration">
+            <!-- SVG de Pareja Enamorada -->
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="45" fill="#fff0f5" opacity="0.3"/>
+                <path d="M50 85c-15-10-30-22-30-38 0-10 8-17 17-17 5 0 9 2 13 6 4-4 8-6 13-6 9 0 17 7 17 17 0 16-15 28-30 38z" fill="#ff4d6d" opacity="0.2"/>
+                <g fill="#c2185b">
+                    <circle cx="42" cy="45" r="8" />
+                    <path d="M30 75 Q42 55 45 75 Z" />
+                    <circle cx="58" cy="45" r="8" />
+                    <path d="M70 75 Q58 55 55 75 Z" />
+                    <path d="M50 48 c-2-2-5-2-5 1 0 3 5 6 5 6s5-3 5-6c0-3-3-3-5-1z" fill="#ff0054">
+                        <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite" />
+                    </path>
+                </g>
+            </svg>
+        </div>
         
         <h1>Feliz 3er Aniversario</h1>
         
@@ -170,11 +207,14 @@
             <br>
             <p>Sé que te mudaste persiguiendo tus metas y estoy muy orgulloso de ti, pero mi meta principal sigue siendo estar a tu lado. Estos tres años son solo el comienzo.</p>
         </div>
-        
+
         <button class="btn" id="playBtn">
             <span class="play-icon" id="icon">▶</span>
             <span id="txt">Escuchar nuestra canción</span>
         </button>
+
+        <!-- Leyenda movida al final -->
+        <div class="love-note">Te amo</div>
     </div>
 
     <script>
