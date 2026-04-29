@@ -3,57 +3,82 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz 3er Aniversario - Nuestra Historia</title>
-    <!-- Fuentes elegantes de Google Fonts -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Feliz 3er Aniversario</title>
+    <!-- Fuentes premium -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Estilos generales y fondo con tonos románticos */
-        body {
+        /* Configuración para evitar scroll y saltos en iPhone */
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
             margin: 0;
             padding: 0;
-            min-height: 100vh;
+            overflow: hidden; /* Evita que la pantalla se mueva */
+            position: fixed; /* Fija la vista en móviles */
+        }
+
+        body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: #ffb6c1; /* Color base rosa */
+            background: linear-gradient(180deg, #ffb6c1 0%, #ffc0cb 100%);
             font-family: 'Poppins', sans-serif;
-            overflow: hidden; 
-            color: #333;
         }
 
-        /* Contenedor principal de la tarjeta */
+        /* Tarjeta inspirada en tu captura */
         .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 2.5rem 2rem;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: #fffcfd;
+            padding: 2.5rem 1.8rem;
+            border-radius: 45px; /* Bordes muy redondeados como en la foto */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
             text-align: center;
-            max-width: 480px;
-            width: 90%;
+            max-width: 360px;
+            width: 88%;
             z-index: 10;
             position: relative;
-            animation: fadeIn 2s ease-in-out;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: none;
+        }
+
+        /* Círculo del corazón superior */
+        .header-heart-wrapper {
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            margin: -75px auto 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+            z-index: 11;
+        }
+
+        .header-heart-wrapper span {
+            font-size: 2.8rem;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
-            color: #d81b60;
+            color: #c2185b;
             font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            margin-top: 0;
-            text-shadow: 1px 1px 2px rgba(216, 27, 96, 0.1);
+            margin: 0 0 1.2rem 0;
+            font-weight: 700;
         }
 
-        .dedicatoria {
-            font-size: 1rem;
+        .content {
+            font-size: 0.92rem;
             line-height: 1.7;
-            margin-bottom: 2rem;
             color: #444;
-            text-align: justify;
+            margin-bottom: 2.5rem;
         }
 
         .highlight {
@@ -61,130 +86,140 @@
             font-weight: 600;
         }
 
-        /* Estilo del botón de música */
+        /* Botón estilo píldora guinda */
         .play-btn {
-            background-color: #d81b60;
+            background-color: #ad144b;
             color: white;
             border: none;
-            padding: 16px 32px;
-            font-size: 1.1rem;
-            border-radius: 50px;
+            padding: 16px 20px;
+            font-size: 1.05rem;
+            border-radius: 40px;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            box-shadow: 0 8px 15px rgba(216, 27, 96, 0.3);
-            transition: all 0.3s ease;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin: 0 auto;
-            outline: none;
+            box-shadow: 0 8px 20px rgba(173, 20, 75, 0.25);
+            transition: transform 0.1s ease;
         }
 
-        .play-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(216, 27, 96, 0.4);
-            background-color: #e91e63;
+        .play-btn:active {
+            transform: scale(0.96);
         }
 
-        /* Corazones cayendo */
-        .heart {
-            position: absolute;
-            top: -10vh;
-            font-size: 1.5rem;
-            animation: fall linear forwards;
-            z-index: 1;
-            user-select: none;
-            pointer-events: none;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-        }
-
-        .photo-frame {
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background-color: #ffd8e4;
-            margin: 0 auto 20px auto;
+        .btn-icon {
+            background: #ff9800; /* Color naranja para el icono play */
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.2rem;
-            box-shadow: 0 5px 15px rgba(216, 27, 96, 0.2);
-            border: 4px solid white;
+            font-size: 0.7rem;
+        }
+
+        /* Elementos animados optimizados */
+        .floating-item {
+            position: absolute;
+            top: -10vh;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+            /* Usar transform 3D para fluidez en iPhone */
+            transform: translate3d(0, 0, 0);
+        }
+
+        @keyframes fall {
+            0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translate3d(0, 110vh, 0) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- REPRODUCTOR DE AUDIO -->
     <audio id="cancion">
         <source src="la_ruta_a_tu_mirada.mp3" type="audio/mpeg">
-        Tu navegador no soporta el audio.
     </audio>
 
     <div class="card">
-        <div class="photo-frame">✈️❤️</div>
+        <div class="header-heart-wrapper">
+            <span>❤️</span>
+        </div>
         
         <h1>Feliz 3er Aniversario</h1>
         
-        <div class="dedicatoria">
-            Mi amor, aunque hoy nos separe la distancia por el trabajo, quiero que sepas que nada ha cambiado. Te preparé este pequeño detalle porque describe exactamente lo que siento: <span class="highlight">voy a mover cielo y tierra para estar contigo muy pronto</span>. <br><br>
-            Sé que te mudaste persiguiendo tus metas y estoy muy orgulloso de ti, pero mi meta principal sigue siendo estar a tu lado. Estos tres años son solo el comienzo de todo lo que nos espera.
+        <div class="content">
+            <p>Mi amor, aunque hoy nos separe la distancia por el trabajo, quiero que sepas que nada ha cambiado. Te preparé este pequeño detalle porque describe exactamente lo que siento: <span class="highlight">voy a mover cielo y tierra para estar contigo muy pronto</span>.</p>
+            
+            <p>Sé que te mudaste persiguiendo tus metas y estoy muy orgulloso de ti, pero mi meta principal sigue siendo estar a tu lado. Estos tres años son solo el comienzo de todo lo que nos espera.</p>
         </div>
         
         <button class="play-btn" id="playBtn">
-            <span id="btnText">▶️ Escuchar nuestra canción</span>
+            <span class="btn-icon" id="btnIcon">▶</span> 
+            <span id="btnText">Escuchar nuestra canción</span>
         </button>
     </div>
 
     <script>
         const playBtn = document.getElementById('playBtn');
         const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
         const cancion = document.getElementById('cancion');
-        const heartEmojis = ['❤️', '💖', '💕', '✈️', '💗', '💓', '🏠'];
+        
+        // Elementos que caerán (Corazones y aviones)
+        const items = ['❤️', '💖', '💕', '✈️', '💗', '✨'];
 
-        // Lluvia constante de corazones
-        function createHeart() {
-            const heart = document.createElement('div');
-            heart.classList.add('heart');
-            heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
-            const duration = Math.random() * 3 + 4; 
-            heart.style.animationDuration = duration + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, duration * 1000);
+        function createItem() {
+            // Límite de elementos para no saturar el procesador del iPhone
+            if (document.querySelectorAll('.floating-item').length > 15) return;
+
+            const item = document.createElement('div');
+            item.className = 'floating-item';
+            item.innerText = items[Math.floor(Math.random() * items.length)];
+            
+            const startX = Math.random() * 100;
+            item.style.left = startX + 'vw';
+            item.style.fontSize = (Math.random() * 1.2 + 0.9) + 'rem';
+            
+            const duration = Math.random() * 4 + 5; 
+            item.style.animation = `fall ${duration}s linear forwards`;
+            
+            document.body.appendChild(item);
+
+            // Limpieza automática
+            setTimeout(() => { item.remove(); }, duration * 1000);
         }
 
-        setInterval(createHeart, 350);
+        // Lluvia constante y optimizada (cada 700ms para suavidad)
+        setInterval(createItem, 700);
 
-        // Control de música
+        // Control del audio
         playBtn.addEventListener('click', () => {
             if (cancion.paused) {
                 cancion.play().then(() => {
-                    btnText.innerText = '⏸️ Pausar nuestra canción';
-                    playBtn.style.backgroundColor = '#ad144b';
-                }).catch(e => {
-                    btnText.innerText = '⏸️ Pausar nuestra canción';
+                    btnText.innerText = 'Pausar nuestra canción';
+                    btnIcon.innerText = '❚❚';
+                }).catch(() => {
+                    // Si el navegador bloquea el play automático
+                    btnText.innerText = 'Pausar nuestra canción';
+                    btnIcon.innerText = '❚❚';
                 });
             } else {
                 cancion.pause();
-                btnText.innerText = '▶️ Escuchar nuestra canción';
-                playBtn.style.backgroundColor = '#d81b60';
+                btnText.innerText = 'Escuchar nuestra canción';
+                btnIcon.innerText = '▶';
             }
         });
+
+        // Prevenir el scroll por toque en iPhone
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
     </script>
 </body>
 </html>
