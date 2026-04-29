@@ -4,77 +4,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Feliz 3er Aniversario</title>
-    <!-- Fuentes premium -->
+    <title>Feliz Aniversario</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <style>
-        /* Configuración para evitar scroll y saltos en iPhone */
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
         }
 
         html, body {
             width: 100%;
             height: 100%;
-            margin: 0;
-            padding: 0;
-            overflow: hidden; /* Evita que la pantalla se mueva */
-            position: fixed; /* Fija la vista en móviles */
+            overflow: hidden;
+            position: fixed;
+            background: #ffb6c1;
+            background: linear-gradient(180deg, #ffb6c1 0%, #ffc0cb 100%);
+            font-family: 'Poppins', sans-serif;
         }
 
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #ffb6c1; /* Color base rosa */
-            background: linear-gradient(180deg, #ffb6c1 0%, #ffc0cb 100%);
-            font-family: 'Poppins', sans-serif;
         }
 
-        /* Tarjeta inspirada en tu captura */
+        /* Tarjeta principal limpia */
         .card {
             background: #fffcfd;
-            padding: 2.5rem 1.8rem;
-            border-radius: 45px; /* Bordes muy redondeados como en la foto */
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 2.8rem 1.8rem;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
             text-align: center;
-            max-width: 360px;
+            max-width: 350px;
             width: 88%;
             z-index: 10;
             position: relative;
-            border: none;
         }
 
-        /* Círculo del corazón superior */
-        .header-heart-wrapper {
-            width: 90px;
-            height: 90px;
+        /* Corazón flotante sobre la tarjeta */
+        .header-heart {
+            width: 85px;
+            height: 85px;
             background: white;
             border-radius: 50%;
-            margin: -75px auto 20px auto;
+            margin: -80px auto 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            font-size: 2.8rem;
             position: relative;
             z-index: 11;
-        }
-
-        .header-heart-wrapper span {
-            font-size: 2.8rem;
         }
 
         h1 {
             font-family: 'Dancing Script', cursive;
             color: #c2185b;
-            font-size: 2.8rem;
-            margin: 0 0 1.2rem 0;
+            font-size: 2.6rem;
+            margin-bottom: 1.5rem;
             font-weight: 700;
         }
 
-        .content {
+        .text-body {
             font-size: 0.92rem;
             line-height: 1.7;
             color: #444;
@@ -86,140 +79,122 @@
             font-weight: 600;
         }
 
-        /* Botón estilo píldora guinda */
-        .play-btn {
+        /* Botón estilo píldora premium */
+        .btn {
             background-color: #ad144b;
             color: white;
             border: none;
-            padding: 16px 20px;
-            font-size: 1.05rem;
-            border-radius: 40px;
+            padding: 16px;
+            font-size: 1rem;
+            border-radius: 50px;
             cursor: pointer;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 600;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            box-shadow: 0 8px 20px rgba(173, 20, 75, 0.25);
+            gap: 10px;
+            font-weight: 600;
+            box-shadow: 0 10px 25px rgba(173, 20, 75, 0.3);
             transition: transform 0.1s ease;
         }
 
-        .play-btn:active {
+        .btn:active {
             transform: scale(0.96);
         }
 
-        .btn-icon {
-            background: #ff9800; /* Color naranja para el icono play */
-            width: 24px;
-            height: 24px;
-            border-radius: 4px;
+        .play-icon {
+            background: #ff9800;
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 0.7rem;
+            color: white;
         }
 
-        /* Elementos animados optimizados */
-        .floating-item {
+        /* Animaciones fluidas para iOS */
+        .floating {
             position: absolute;
             top: -10vh;
             pointer-events: none;
             z-index: 1;
-            user-select: none;
-            /* Usar transform 3D para fluidez en iPhone */
-            transform: translate3d(0, 0, 0);
+            will-change: transform;
         }
 
         @keyframes fall {
-            0% { transform: translate3d(0, 0, 0) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translate3d(0, 110vh, 0) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="cancion">
+    <audio id="player">
         <source src="la_ruta_a_tu_mirada.mp3" type="audio/mpeg">
     </audio>
 
     <div class="card">
-        <div class="header-heart-wrapper">
-            <span>❤️</span>
-        </div>
+        <div class="header-heart">❤️</div>
         
         <h1>Feliz 3er Aniversario</h1>
         
-        <div class="content">
+        <div class="text-body">
             <p>Mi amor, aunque hoy nos separe la distancia por el trabajo, quiero que sepas que nada ha cambiado. Te preparé este pequeño detalle porque describe exactamente lo que siento: <span class="highlight">voy a mover cielo y tierra para estar contigo muy pronto</span>.</p>
-            
-            <p>Sé que te mudaste persiguiendo tus metas y estoy muy orgulloso de ti, pero mi meta principal sigue siendo estar a tu lado. Estos tres años son solo el comienzo de todo lo que nos espera.</p>
+            <br>
+            <p>Sé que te mudaste persiguiendo tus metas y estoy muy orgulloso de ti, pero mi meta principal sigue siendo estar a tu lado. Estos tres años son solo el comienzo.</p>
         </div>
         
-        <button class="play-btn" id="playBtn">
-            <span class="btn-icon" id="btnIcon">▶</span> 
-            <span id="btnText">Escuchar nuestra canción</span>
+        <button class="btn" id="playBtn">
+            <span class="play-icon" id="icon">▶</span>
+            <span id="txt">Escuchar nuestra canción</span>
         </button>
     </div>
 
     <script>
-        const playBtn = document.getElementById('playBtn');
-        const btnText = document.getElementById('btnText');
-        const btnIcon = document.getElementById('btnIcon');
-        const cancion = document.getElementById('cancion');
+        const btn = document.getElementById('playBtn');
+        const txt = document.getElementById('txt');
+        const icon = document.getElementById('icon');
+        const audio = document.getElementById('player');
         
-        // Elementos que caerán (Corazones y aviones)
-        const items = ['❤️', '💖', '💕', '✈️', '💗', '✨'];
+        const symbols = ['❤️', '💖', '💕', '✈️', '✨'];
 
-        function createItem() {
-            // Límite de elementos para no saturar el procesador del iPhone
-            if (document.querySelectorAll('.floating-item').length > 15) return;
-
-            const item = document.createElement('div');
-            item.className = 'floating-item';
-            item.innerText = items[Math.floor(Math.random() * items.length)];
-            
-            const startX = Math.random() * 100;
-            item.style.left = startX + 'vw';
-            item.style.fontSize = (Math.random() * 1.2 + 0.9) + 'rem';
-            
-            const duration = Math.random() * 4 + 5; 
-            item.style.animation = `fall ${duration}s linear forwards`;
-            
-            document.body.appendChild(item);
-
-            // Limpieza automática
-            setTimeout(() => { item.remove(); }, duration * 1000);
+        function spawn() {
+            if (document.querySelectorAll('.floating').length > 18) return;
+            const el = document.createElement('div');
+            el.className = 'floating';
+            el.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 1.3 + 0.8) + 'rem';
+            const dur = Math.random() * 4 + 4;
+            el.style.animation = `fall ${dur}s linear forwards`;
+            document.body.appendChild(el);
+            setTimeout(() => el.remove(), dur * 1000);
         }
 
-        // Lluvia constante y optimizada (cada 700ms para suavidad)
-        setInterval(createItem, 700);
+        setInterval(spawn, 600);
 
-        // Control del audio
-        playBtn.addEventListener('click', () => {
-            if (cancion.paused) {
-                cancion.play().then(() => {
-                    btnText.innerText = 'Pausar nuestra canción';
-                    btnIcon.innerText = '❚❚';
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    txt.innerText = 'Pausar nuestra canción';
+                    icon.innerText = '❚❚';
                 }).catch(() => {
-                    // Si el navegador bloquea el play automático
-                    btnText.innerText = 'Pausar nuestra canción';
-                    btnIcon.innerText = '❚❚';
+                    txt.innerText = 'Pausar nuestra canción';
+                    icon.innerText = '❚❚';
                 });
             } else {
-                cancion.pause();
-                btnText.innerText = 'Escuchar nuestra canción';
-                btnIcon.innerText = '▶';
+                audio.pause();
+                txt.innerText = 'Escuchar nuestra canción';
+                icon.innerText = '▶';
             }
         });
 
-        // Prevenir el scroll por toque en iPhone
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
+        // Bloqueo de scroll para iPhone
+        document.addEventListener('touchmove', (e) => e.preventDefault(), { passive: false });
     </script>
 </body>
 </html>
